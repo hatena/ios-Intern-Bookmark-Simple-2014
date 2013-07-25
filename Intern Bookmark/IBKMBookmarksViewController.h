@@ -1,5 +1,5 @@
 //
-//  IBKMMasterViewController.h
+//  IBKMBookmarksViewController.h
 //  Intern Bookmark
 //
 //  Created by Hiroki Kato on 2013/07/25.
@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface IBKMMasterViewController : UITableViewController
+@interface IBKMBookmarksViewController : UITableViewController
 
 @end
