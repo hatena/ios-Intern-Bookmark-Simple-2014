@@ -24,6 +24,12 @@
 		0929F0E717A0D60C006FB8AA /* Intern_BookmarkTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 0929F0E617A0D60C006FB8AA /* Intern_BookmarkTests.m */; };
 		0929F0F617A0FAFD006FB8AA /* IBKMBookmarksViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0929F0F517A0FAFD006FB8AA /* IBKMBookmarksViewController.m */; };
 		0929F0F917A0FB0F006FB8AA /* IBKMBookmarkViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0929F0F817A0FB0F006FB8AA /* IBKMBookmarkViewController.m */; };
+		0929F0FC17A10847006FB8AA /* IBKMInternBookmarkAPIClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 0929F0FB17A10847006FB8AA /* IBKMInternBookmarkAPIClient.m */; };
+		0929F0FF17A10BA5006FB8AA /* IBKMBookmarkManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0929F0FE17A10BA5006FB8AA /* IBKMBookmarkManager.m */; };
+		0929F10617A10BB3006FB8AA /* IBKMBookmark.m in Sources */ = {isa = PBXBuildFile; fileRef = 0929F10117A10BB2006FB8AA /* IBKMBookmark.m */; };
+		0929F10717A10BB3006FB8AA /* IBKMEntry.m in Sources */ = {isa = PBXBuildFile; fileRef = 0929F10317A10BB2006FB8AA /* IBKMEntry.m */; };
+		0929F10817A10BB3006FB8AA /* IBKMUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 0929F10517A10BB3006FB8AA /* IBKMUser.m */; };
+		0929F10B17A10C69006FB8AA /* NSDateFormatter+MySQL.m in Sources */ = {isa = PBXBuildFile; fileRef = 0929F10A17A10C69006FB8AA /* NSDateFormatter+MySQL.m */; };
 		9E57233ED6BA4F30A039FEB4 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2DB3E9A75C0047CBBA476D0F /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -62,6 +68,18 @@
 		0929F0F517A0FAFD006FB8AA /* IBKMBookmarksViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IBKMBookmarksViewController.m; sourceTree = "<group>"; };
 		0929F0F717A0FB0F006FB8AA /* IBKMBookmarkViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IBKMBookmarkViewController.h; sourceTree = "<group>"; };
 		0929F0F817A0FB0F006FB8AA /* IBKMBookmarkViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IBKMBookmarkViewController.m; sourceTree = "<group>"; };
+		0929F0FA17A10847006FB8AA /* IBKMInternBookmarkAPIClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IBKMInternBookmarkAPIClient.h; sourceTree = "<group>"; };
+		0929F0FB17A10847006FB8AA /* IBKMInternBookmarkAPIClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IBKMInternBookmarkAPIClient.m; sourceTree = "<group>"; };
+		0929F0FD17A10BA5006FB8AA /* IBKMBookmarkManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IBKMBookmarkManager.h; sourceTree = "<group>"; };
+		0929F0FE17A10BA5006FB8AA /* IBKMBookmarkManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IBKMBookmarkManager.m; sourceTree = "<group>"; };
+		0929F10017A10BB2006FB8AA /* IBKMBookmark.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IBKMBookmark.h; sourceTree = "<group>"; };
+		0929F10117A10BB2006FB8AA /* IBKMBookmark.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IBKMBookmark.m; sourceTree = "<group>"; };
+		0929F10217A10BB2006FB8AA /* IBKMEntry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IBKMEntry.h; sourceTree = "<group>"; };
+		0929F10317A10BB2006FB8AA /* IBKMEntry.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IBKMEntry.m; sourceTree = "<group>"; };
+		0929F10417A10BB3006FB8AA /* IBKMUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IBKMUser.h; sourceTree = "<group>"; };
+		0929F10517A10BB3006FB8AA /* IBKMUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IBKMUser.m; sourceTree = "<group>"; };
+		0929F10917A10C69006FB8AA /* NSDateFormatter+MySQL.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDateFormatter+MySQL.h"; sourceTree = "<group>"; };
+		0929F10A17A10C69006FB8AA /* NSDateFormatter+MySQL.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDateFormatter+MySQL.m"; sourceTree = "<group>"; };
 		2DB3E9A75C0047CBBA476D0F /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		317E3611069D4FEA9DEC644C /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
@@ -134,6 +152,18 @@
 				0929F0F517A0FAFD006FB8AA /* IBKMBookmarksViewController.m */,
 				0929F0F717A0FB0F006FB8AA /* IBKMBookmarkViewController.h */,
 				0929F0F817A0FB0F006FB8AA /* IBKMBookmarkViewController.m */,
+				0929F0FA17A10847006FB8AA /* IBKMInternBookmarkAPIClient.h */,
+				0929F0FB17A10847006FB8AA /* IBKMInternBookmarkAPIClient.m */,
+				0929F0FD17A10BA5006FB8AA /* IBKMBookmarkManager.h */,
+				0929F0FE17A10BA5006FB8AA /* IBKMBookmarkManager.m */,
+				0929F10017A10BB2006FB8AA /* IBKMBookmark.h */,
+				0929F10117A10BB2006FB8AA /* IBKMBookmark.m */,
+				0929F10217A10BB2006FB8AA /* IBKMEntry.h */,
+				0929F10317A10BB2006FB8AA /* IBKMEntry.m */,
+				0929F10417A10BB3006FB8AA /* IBKMUser.h */,
+				0929F10517A10BB3006FB8AA /* IBKMUser.m */,
+				0929F10917A10C69006FB8AA /* NSDateFormatter+MySQL.h */,
+				0929F10A17A10C69006FB8AA /* NSDateFormatter+MySQL.m */,
 			);
 			path = "Intern Bookmark";
 			sourceTree = "<group>";
@@ -318,6 +348,12 @@
 				0929F0C317A0D60B006FB8AA /* IBKMAppDelegate.m in Sources */,
 				0929F0F617A0FAFD006FB8AA /* IBKMBookmarksViewController.m in Sources */,
 				0929F0F917A0FB0F006FB8AA /* IBKMBookmarkViewController.m in Sources */,
+				0929F0FC17A10847006FB8AA /* IBKMInternBookmarkAPIClient.m in Sources */,
+				0929F0FF17A10BA5006FB8AA /* IBKMBookmarkManager.m in Sources */,
+				0929F10617A10BB3006FB8AA /* IBKMBookmark.m in Sources */,
+				0929F10717A10BB3006FB8AA /* IBKMEntry.m in Sources */,
+				0929F10817A10BB3006FB8AA /* IBKMUser.m in Sources */,
+				0929F10B17A10C69006FB8AA /* NSDateFormatter+MySQL.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
