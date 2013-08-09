@@ -8,6 +8,9 @@
 
 #import "IBKMBookmarkViewController.h"
 
+#import "IBKMBookmark.h"
+#import "IBKMEntry.h"
+
 @interface IBKMBookmarkViewController ()
 
 @end
@@ -27,6 +30,11 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
+    
+    self.title = self.bookmark.entry.title;
+    self.titleLabel.text = self.bookmark.entry.title;
+    self.URLLabel.text = [self.bookmark.entry.URL absoluteString];
+    self.commentLabel.text = self.bookmark.comment;
 }
 
 - (void)didReceiveMemoryWarning

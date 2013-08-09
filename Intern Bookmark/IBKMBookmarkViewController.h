@@ -8,6 +8,14 @@
 
 #import <UIKit/UIKit.h>
 
+@class IBKMBookmark;
+
 @interface IBKMBookmarkViewController : UIViewController
+
+@property (weak, nonatomic) IBOutlet UILabel *titleLabel;
+@property (weak, nonatomic) IBOutlet UILabel *URLLabel;
+@property (weak, nonatomic) IBOutlet UILabel *commentLabel;
+
+@property (nonatomic) IBKMBookmark *bookmark;
 
 @end

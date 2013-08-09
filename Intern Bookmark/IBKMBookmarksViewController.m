@@ -9,6 +9,9 @@
 #import "IBKMBookmarksViewController.h"
 
 #import "IBKMBookmarkManager.h"
+#import "IBKMBookmark.h"
+#import "IBKMEntry.h"
+#import "IBKMBookmarkViewController.h"
 
 @interface IBKMBookmarksViewController ()
 
@@ -36,7 +39,10 @@
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
     
     [[IBKMBookmarkManager sharedManager] reloadBookmarksWithBlock:^(NSError *error) {
-        NSLog(@"%@", [IBKMBookmarkManager sharedManager].bookmarks);
+        if (error) {
+            NSLog(@"Error: %@", error);
+        }
+        [self.tableView reloadData];
     }];
 }
 
@@ -46,82 +52,37 @@
     // Dispose of any resources that can be recreated.
 }
 
-#pragma mark - Table view data source
-
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-#warning Potentially incomplete method implementation.
-    // Return the number of sections.
-    return 0;
+    if ([segue.identifier isEqualToString:@"IBKMOpenBookmarkSegue"]) {
+        NSIndexPath *selected = [self.tableView indexPathForSelectedRow];
+        IBKMBookmark *bookmark = [IBKMBookmarkManager sharedManager].bookmarks[selected.row];
+        
+        IBKMBookmarkViewController *bookmarkViewController = segue.destinationViewController;
+        bookmarkViewController.bookmark = bookmark;
+    }
 }
+
+#pragma mark - Table view data source
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-#warning Incomplete method implementation.
     // Return the number of rows in the section.
-    return 0;
+    return [[IBKMBookmarkManager sharedManager].bookmarks count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *CellIdentifier = @"Cell";
+    static NSString *CellIdentifier = @"IBKMBookmarkCell";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
     
     // Configure the cell...
+    IBKMBookmark *bookmark = [IBKMBookmarkManager sharedManager].bookmarks[indexPath.row];
+    
+    cell.textLabel.text = bookmark.entry.title;
+    cell.detailTextLabel.text = [bookmark.entry.URL absoluteString];
     
     return cell;
-}
-
-/*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
-}
-*/
-
-/*
-// Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    }   
-    else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
-}
-*/
-
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath
-{
-}
-*/
-
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
-
-#pragma mark - Table view delegate
-
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Navigation logic may go here. Create and push another view controller.
-    /*
-     <#DetailViewController#> *detailViewController = [[<#DetailViewController#> alloc] initWithNibName:@"<#Nib name#>" bundle:nil];
-     // ...
-     // Pass the selected object to the new view controller.
-     [self.navigationController pushViewController:detailViewController animated:YES];
-     */
 }
 
 @end
