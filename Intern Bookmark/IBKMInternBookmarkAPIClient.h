@@ -6,9 +6,9 @@
 //  Copyright (c) 2013年 株式会社はてな. All rights reserved.
 //
 
-#import "AFHTTPClient.h"
+#import "AFHTTPSessionManager.h"
 
-@interface IBKMInternBookmarkAPIClient : AFHTTPClient
+@interface IBKMInternBookmarkAPIClient : AFHTTPSessionManager
 
 + (instancetype)sharedClient;
 
