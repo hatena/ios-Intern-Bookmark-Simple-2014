@@ -21,15 +21,13 @@
 
 + (IBKMBookmarkManager *)sharedManager
 {
-    static IBKMBookmarkManager *_instance = nil;
+    static IBKMBookmarkManager *_sharedManager = nil;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        _sharedManager = [[self alloc] init];
+    });
 
-    @synchronized (self) {
-        if (_instance == nil) {
-            _instance = [[self alloc] init];
-        }
-    }
-
-    return _instance;
+    return _sharedManager;
 }
 
 - (id)init

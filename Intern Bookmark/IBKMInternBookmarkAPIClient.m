@@ -8,8 +8,6 @@
 
 #import "IBKMInternBookmarkAPIClient.h"
 
-#import "AFJSONRequestOperation.h"
-
 static NSString * const kIBKMInternBookmarkAPIBaseURLString = @"http://localhost:3000/";
 
 @implementation IBKMInternBookmarkAPIClient
@@ -19,35 +17,27 @@ static NSString * const kIBKMInternBookmarkAPIBaseURLString = @"http://localhost
     static IBKMInternBookmarkAPIClient *_sharedClient = nil;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        _sharedClient = [[IBKMInternBookmarkAPIClient alloc] initWithBaseURL:[NSURL URLWithString:kIBKMInternBookmarkAPIBaseURLString]];
+        NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
+        configuration.HTTPAdditionalHeaders = @{
+                                                @"Accept" : @"application/json",
+                                                };
+
+        _sharedClient = [[IBKMInternBookmarkAPIClient alloc]
+                         initWithBaseURL:[NSURL URLWithString:kIBKMInternBookmarkAPIBaseURLString]
+                         sessionConfiguration:configuration];
     });
     
     return _sharedClient;
 }
 
-- (instancetype)initWithBaseURL:(NSURL *)url
-{
-    self = [super initWithBaseURL:url];
-    if (!self) {
-        return nil;
-    }
-    
-    [self registerHTTPOperationClass:[AFJSONRequestOperation class]];
-    
-    // Accept HTTP Header; see http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.1
-    [self setDefaultHeader:@"Accept" value:@"application/json"];
-    
-    return self;
-}
-
 - (void)getBookmarksWithCompletion:(void (^)(NSDictionary *results, NSError *error))block
 {
-    [self getPath:@"/api/bookmarks"
+    [self GET:@"/api/bookmarks"
        parameters:@{}
-          success:^(AFHTTPRequestOperation *operation, id responseObject) {
+          success:^(NSURLSessionDataTask *task, id responseObject) {
               if (block) block(responseObject, nil);
           }
-          failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+          failure:^(NSURLSessionDataTask *task, NSError *error) {
               if (block) block(nil, error);
           }];
 }
