@@ -32,18 +32,10 @@
 {
     [super viewDidLoad];
 
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
- 
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
-    
-    [[IBKMBookmarkManager sharedManager] reloadBookmarksWithBlock:^(NSError *error) {
-        if (error) {
-            NSLog(@"Error: %@", error);
-        }
-        [self.tableView reloadData];
-    }];
+    self.refreshControl = [[UIRefreshControl alloc] init];
+    [self.refreshControl addTarget:self action:@selector(refreshBookmarks:) forControlEvents:UIControlEventValueChanged];
+
+    [self refreshBookmarks:self];
 }
 
 - (void)didReceiveMemoryWarning
@@ -61,6 +53,20 @@
         IBKMBookmarkViewController *bookmarkViewController = segue.destinationViewController;
         bookmarkViewController.bookmark = bookmark;
     }
+}
+
+- (void)refreshBookmarks:(id)sender
+{
+    [self.refreshControl beginRefreshing];
+
+    [[IBKMBookmarkManager sharedManager] reloadBookmarksWithBlock:^(NSError *error) {
+        if (error) {
+            NSLog(@"error = %@", error);
+        }
+        [self.tableView reloadData];
+
+        [self.refreshControl endRefreshing];
+    }];
 }
 
 #pragma mark - Table view data source
@@ -83,6 +89,15 @@
     cell.detailTextLabel.text = [bookmark.entry.URL absoluteString];
     
     return cell;
+}
+
+#pragma mark - IBAction
+
+/* ログイン画面から戻ったとき呼ばれる */
+- (IBAction)closeLoginSegue:(UIStoryboardSegue *)segue
+{
+    // ログインから戻ったら再読込する.
+    [self refreshBookmarks:self];
 }
 
 @end

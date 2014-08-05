@@ -8,10 +8,21 @@
 
 #import "AFHTTPSessionManager.h"
 
-@interface IBKMInternBookmarkAPIClient : AFHTTPSessionManager
+@protocol IBKMInternBookmarkAPIClientDelegate;
+
+@interface IBKMInternBookmarkAPIClient : NSObject
+
+@property (nonatomic, weak) id <NSObject, IBKMInternBookmarkAPIClientDelegate> delegate;
 
 + (instancetype)sharedClient;
++ (NSURL *)loginURL;
 
 - (void)getBookmarksWithCompletion:(void (^)(NSDictionary *results, NSError *error))block;
+
+@end
+
+@protocol IBKMInternBookmarkAPIClientDelegate
+
+- (void)APIClientNeedsLogin:(IBKMInternBookmarkAPIClient *)client;
 
 @end
