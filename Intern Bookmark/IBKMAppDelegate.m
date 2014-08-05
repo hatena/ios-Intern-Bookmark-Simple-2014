@@ -8,10 +8,14 @@
 
 #import "IBKMAppDelegate.h"
 
+#import "AFNetworkActivityIndicatorManager.h"
+
 @implementation IBKMAppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    [AFNetworkActivityIndicatorManager sharedManager].enabled = YES;
+
     [IBKMInternBookmarkAPIClient sharedClient].delegate = self;
 
     return YES;
