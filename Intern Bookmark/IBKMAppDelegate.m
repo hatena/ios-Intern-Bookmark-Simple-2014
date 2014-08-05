@@ -12,7 +12,8 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    // Override point for customization after application launch.
+    [IBKMInternBookmarkAPIClient sharedClient].delegate = self;
+
     return YES;
 }
 							
@@ -41,6 +42,19 @@
 - (void)applicationWillTerminate:(UIApplication *)application
 {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+}
+
+# pragma mark - IBKMInternBookmarkAPIClientDelegate
+
+- (void)APIClientNeedsLogin:(IBKMInternBookmarkAPIClient *)client
+{
+    // Storyboard からログイン画面を作ってモーダル表示する
+
+    UIViewController *rootViewController = [UIApplication sharedApplication].keyWindow.rootViewController;
+    // ID から ViewController をインスタンス化
+    UIViewController *loginViewController = [rootViewController.storyboard instantiateViewControllerWithIdentifier:@"IBKMLoginScene"];
+    // モーダルに表示
+    [rootViewController presentViewController:loginViewController animated:YES completion:nil];
 }
 
 @end

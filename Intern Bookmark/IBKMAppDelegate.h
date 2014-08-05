@@ -7,8 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "IBKMInternBookmarkAPIClient.h"
 
-@interface IBKMAppDelegate : UIResponder <UIApplicationDelegate>
+@interface IBKMAppDelegate : UIResponder <UIApplicationDelegate, IBKMInternBookmarkAPIClientDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
 
