@@ -10,7 +10,7 @@
 
 @protocol IBKMInternBookmarkAPIClientDelegate;
 
-@interface IBKMInternBookmarkAPIClient : AFHTTPSessionManager
+@interface IBKMInternBookmarkAPIClient : NSObject
 
 @property (nonatomic, weak) id <NSObject, IBKMInternBookmarkAPIClientDelegate> delegate;
 

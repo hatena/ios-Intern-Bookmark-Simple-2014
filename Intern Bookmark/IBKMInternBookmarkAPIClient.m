@@ -10,6 +10,12 @@
 
 static NSString * const kIBKMInternBookmarkAPIBaseURLString = @"http://localhost:3000/";
 
+@interface IBKMInternBookmarkAPIClient()
+
+@property (nonatomic) AFHTTPSessionManager *sessionManager;
+
+@end
+
 @implementation IBKMInternBookmarkAPIClient
 
 + (instancetype)sharedClient
@@ -17,17 +23,27 @@ static NSString * const kIBKMInternBookmarkAPIBaseURLString = @"http://localhost
     static IBKMInternBookmarkAPIClient *_sharedClient = nil;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
+        _sharedClient = [[self alloc] init];
+    });
+
+    return _sharedClient;
+}
+
+- (id)init
+{
+    self = [super init];
+    if (self) {
         NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
         configuration.HTTPAdditionalHeaders = @{
-                                                @"Accept" : @"application/json",
-                                                };
+            @"Accept" : @"application/json",
+        };
 
-        _sharedClient = [[IBKMInternBookmarkAPIClient alloc]
+        self.sessionManager = [[AFHTTPSessionManager alloc]
                          initWithBaseURL:[NSURL URLWithString:kIBKMInternBookmarkAPIBaseURLString]
                          sessionConfiguration:configuration];
-    });
-    
-    return _sharedClient;
+    }
+
+    return self;
 }
 
 + (NSURL *)loginURL
@@ -38,7 +54,7 @@ static NSString * const kIBKMInternBookmarkAPIBaseURLString = @"http://localhost
 
 - (void)getBookmarksWithCompletion:(void (^)(NSDictionary *results, NSError *error))block
 {
-    [self GET:@"/api/bookmarks"
+    [self.sessionManager GET:@"/api/bookmarks"
        parameters:@{}
           success:^(NSURLSessionDataTask *task, id responseObject) {
               if (block) block(responseObject, nil);
