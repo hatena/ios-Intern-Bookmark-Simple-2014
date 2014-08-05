@@ -30,6 +30,12 @@ static NSString * const kIBKMInternBookmarkAPIBaseURLString = @"http://localhost
     return _sharedClient;
 }
 
++ (NSURL *)loginURL
+{
+    return [[NSURL URLWithString:kIBKMInternBookmarkAPIBaseURLString] URLByAppendingPathComponent:@"login"];
+}
+
+
 - (void)getBookmarksWithCompletion:(void (^)(NSDictionary *results, NSError *error))block
 {
     [self GET:@"/api/bookmarks"
@@ -38,8 +44,23 @@ static NSString * const kIBKMInternBookmarkAPIBaseURLString = @"http://localhost
               if (block) block(responseObject, nil);
           }
           failure:^(NSURLSessionDataTask *task, NSError *error) {
-              if (block) block(nil, error);
+              // 401 が返ったときログインが必要.
+              if (((NSHTTPURLResponse *)task.response).statusCode == 401 && [self needsLogin]) {
+                  if (block) block(nil, nil);
+              }
+              else {
+                  if (block) block(nil, error);
+              }
           }];
+}
+
+- (BOOL)needsLogin
+{
+    BOOL delegated = [self.delegate respondsToSelector:@selector(APIClientNeedsLogin:)];
+    if (delegated) {
+        [self.delegate APIClientNeedsLogin:self];
+    }
+    return delegated;
 }
 
 @end
